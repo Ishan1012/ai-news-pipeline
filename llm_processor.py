@@ -20,18 +20,26 @@ prompt = PromptTemplate(
         You are a news summarization system.
 
         IMPORTANT:
-        - Think briefly
-        - DO NOT show your reasoning
-        - OUTPUT ONLY the final answer
+        - Do not explain your reasoning
+        - Do not include analysis, thoughts, or planning
+        - Do not include phrases like "this article discusses" or "the article explains"
+        - Output only the requested results
 
-        Task:
-        1. Summarize the article in 2 paragraph of 8-10 sentences.
-        2. Classify domain: AI | Research | Medicine | Public Health
+        TASK:
+        1. Write a factual summary of the article in exactly 2 paragraphs.
+        2. Each paragraph must contain 8-10 sentences.
+        3. Maintain a neutral, journalistic tone.
+        5. Classify the article into one domain from: AI, Research, Medicine, Public Health.
 
-        Article:
+        ARTICLE:
         {text}
 
-        FINAL ANSWER:
+        FINAL ANSWER FORMAT:
+        Paragraph 1 summary text.
+        
+        Paragraph 2 summary text.
+        
+        Domain: <one domain only>
     """
 )
 

@@ -13,5 +13,6 @@ LLM_MODELS = ["tngtech/deepseek-r1t-chimera:free","tngtech/deepseek-r1t2-chimera
 
 SCRAPE_SOURCES = [
     "https://indianexpress.com/section/technology/artificial-intelligence/",
-    "https://timesofindia.indiatimes.com/topic/artificial-intelligence/news",
+    "https://www.bbc.com/news/topics/ce1qrvleleqt",
+    "https://www.financialexpress.com/"
 ]
