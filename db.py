@@ -12,6 +12,13 @@ def save_article(article):
         upsert=True
     )
 
+def find_article_by_url(url):
+    return collection.find_one({"url": url}, {"_id": 0})
+
+def get_summary_by_url(url):
+    article = find_article_by_url(url)
+    return article.get("summary") if article else None
+
 def fetch_articles_paginated(skip: int = 0, limit: int = 10):
     cursor = (
         collection

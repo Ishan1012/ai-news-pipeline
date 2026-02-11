@@ -2,7 +2,7 @@ import streamlit as st
 from scraper import scrape_articles, fetch_article_text, classify_domain
 from cleaner import clean_text
 from llm_processor import process_article
-from db import save_article, fetch_articles_paginated, count_articles
+from db import save_article, fetch_articles_paginated, count_articles, find_article_by_url, get_summary_by_url
 from config import SCRAPE_SOURCES
 
 st.set_page_config(
@@ -74,7 +74,7 @@ def run_pipeline(sources):
                     continue
 
                 domain = classify_domain(text)
-                summary = process_article(text)
+                summary = process_article(text) if not find_article_by_url(art["url"]) else get_summary_by_url(art["url"])
                 summary = summary if "Summary unavailable" not in summary else text[:500] + "..."
 
                 save_article({
@@ -126,17 +126,17 @@ col1, col2, col3 = st.columns([1, 2, 1])
 
 with col1:
     if st.session_state.page > 0:
-        if st.button("⬅ Previous"):
+        if st.button("⬅️ Previous"):
             st.session_state.page -= 1
             st.rerun()
 
 with col3:
     if start + PAGE_SIZE < total_articles:
-        if st.button("Read More ➡"):
+        if st.button("Read More ➡️"):
             st.session_state.page += 1
             st.rerun()
 
 st.caption(
-    f"Showing {start + 1}–{min(start + PAGE_SIZE, total_articles)} "
+    f"Showing {start + 1}-{min(start + PAGE_SIZE, total_articles)} "
     f"of {total_articles} articles"
 )
